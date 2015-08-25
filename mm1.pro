@@ -14,13 +14,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    form_tek_sost_afsz.cpp
+    form_tek_sost_afsz.cpp \
+    form_tek_sost_ik.cpp
 
 HEADERS  += mainwindow.h \
-    form_tek_sost_afsz.h
+    form_tek_sost_afsz.h \
+    form_tek_sost_ik.h
 
 FORMS    += mainwindow.ui \
-    form_tek_sost_afsz.ui
+    form_tek_sost_afsz.ui \
+    form_tek_sost_ik.ui
 
 RESOURCES += \
     res1.qrc

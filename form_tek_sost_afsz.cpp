@@ -74,24 +74,30 @@ void Form_tek_sost_AFSZ::drawCircleText() {
 #endif
 
     double r = ui->dial->width()/2;
-    double x[NUM],X = double(ui->dial->x() +r -10);
-    double y[NUM],Y = double(ui->dial->y() +r-30);
+    double x[NUM],X = double(ui->dial->x() +r -0);
+    double y[NUM],Y = double(ui->dial->y() +r-10);
 
     int i;
     double angle, phi;
     const int NN =6;
-    int dy[NN] = {1 ,3, 6 , 10, 15,21};
-    int dx[NN] = {10, 20, 30, 40, 50 };
+    int dy[NN] = {1 ,4, 7 , 11, 17, 25};
+    int dx[NN] = {10, 20, 30, 50, 65, 80 };
     const double Mult =3;
     int w;
     for(angle=0, i=0; i<NUM && angle<360; i++, angle += 360/NUM) {
         list << new QLabel( this);
         list[i]->setFont(QFont("Times New Roman", 9,-1,true));
+        list[i]->setStyleSheet("QLabel {"
+                                     "border-style: solid;"
+                                     "border-width: 1px;"
+                                     "border-color: gray; "
+                                     "}");
         list[i]->setText( s[i] );
         phi = angle / 180 * M_PI;
         w = list[i]->width();
         x[i] = X + r*1.6 * sin(phi) - ( w *(i>=NUM/2?1:0) );
         y[i] = Y + r*1.6 * cos(phi);
+        //lines[i] = new QLine(x,y,)
 
     }
 
@@ -100,13 +106,13 @@ void Form_tek_sost_AFSZ::drawCircleText() {
         //x[NN - 1 - i] += dx[i];
 
         y[NUM/2-1 - (NN-1) + i] -= dy[i]*Mult;
-        x[NN  - i] += dx[i];
+        //x[NUM/2-1 - (NN-1) + i] += dx[i];
 
         y[NUM/2 + (NN-1) - i] -= dy[i]*Mult;
         x[NUM/2 + (NN-1) - i] -= dx[i];
 
         y[NUM -1 - (NN-1) + i] += dy[i]*Mult;
-        x[NUM-(NN-1) + i] -= dx[i];
+        //x[NUM-(NN-1) + i] -= dx[i];
     }
 
     for(i=0; i< NUM; i++) {
@@ -118,12 +124,29 @@ void Form_tek_sost_AFSZ::drawCircleText() {
 
 
 void Form_tek_sost_AFSZ::on_dial_valueChanged(int i) {
-    list[i]->setStyleSheet("QLabel { background-color : red; color : blue; }");
+    //list[i]->setStyleSheet("QLabel { background-color : red; color : blue; }");
+    list[i]->setStyleSheet("QLabel {"
+                                  "background-color : red;"
+                                 "border-style: solid;"
+                                 "border-width: 1px;"
+                                 "border-color: gray; "
+                                 "}");
 }
 
 void Form_tek_sost_AFSZ::on_dial_sliderMoved(int i) {
-    list[i]->setStyleSheet("QLabel {  background-color : yellow; color : green; }");
-    if(lastPos>=0)
-        list[lastPos]->setStyleSheet("QLabel { background-color : white; color : black; }");
+    list[i]->resize(list[i]->width()*3, list[i]->height()*2);
+    list[i]->setFont(QFont("Times New Roman", 22,-1,true));
+    list[i]->setStyleSheet("QLabel {  background-color : lightgray; color : green; }");
+    list[i]->raise();
+        if(lastPos>=0) {
+            list[lastPos]->resize(list[i]->width()/3, list[i]->height()/2);
+            list[lastPos]->setStyleSheet("QLabel {"
+                                     "border-style: solid;"
+                                 "border-width: 1px;"
+                                 "border-color: gray; "
+                                 "background-color : white; color : black;"
+                                 "}");
+             list[lastPos]->setFont(QFont("Times New Roman", 9,-1,true));
+       }
     lastPos = i;
 }

@@ -29,7 +29,7 @@ private slots:
 
 private:
 
-    static const int NUM= 37;
+    static const int NUM= 33;
 
     Ui::Form_tek_sost_AFSZ *ui;
 
