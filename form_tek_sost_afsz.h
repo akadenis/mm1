@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <QList>
-
+#include "animwidget.h"
 using namespace std;
 
 
@@ -23,12 +23,12 @@ public:
 
 
 private slots:
-    void on_dial_valueChanged(int value);
+    //void on_dial_valueChanged(int value);
 
-    void on_dial_sliderMoved(int position);
+    //void on_dial_sliderMoved(int position);
 
 private:
-
+    AnimWidget *aw;
     static const int NUM= 33;
 
     Ui::Form_tek_sost_AFSZ *ui;
@@ -39,7 +39,11 @@ private:
 
     void drawCircleText();
 
+
+    //void keyPressEvent(QKeyEvent * ev);
+
     int lastPos;
+    int lh,lw;
 
 };
 

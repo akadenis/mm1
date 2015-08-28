@@ -14,12 +14,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
+    form_tek_sost_ik.cpp \
+    dataTableModel.cpp \
     form_tek_sost_afsz.cpp \
-    form_tek_sost_ik.cpp
+    animwidget.cpp
 
 HEADERS  += mainwindow.h \
+    form_tek_sost_ik.h \
+    dataTableModel.h \
     form_tek_sost_afsz.h \
-    form_tek_sost_ik.h
+    animwidget.h
 
 FORMS    += mainwindow.ui \
     form_tek_sost_afsz.ui \

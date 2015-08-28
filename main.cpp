@@ -8,6 +8,8 @@ int main(int argc, char *argv[])
     MainWindow w;
     //w.show();
 
+
+
     Form_tek_sost_AFSZ f_tekSost;
     f_tekSost.show();
 

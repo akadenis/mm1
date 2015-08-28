@@ -1,48 +1,74 @@
-#include "form_tek_sost_afsz.h"
-#include "ui_form_tek_sost_afsz.h"
+#include "animwidget.h"
+
+#include <QState>
+#include <QVariant>
+#include <QPropertyAnimation>
 #include <math.h>
 #include <map>
 #include "dataTableModel.h"
 
-Form_tek_sost_AFSZ::Form_tek_sost_AFSZ(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Form_tek_sost_AFSZ)
-{
+
+
+AnimWidget::AnimWidget() {
+    photo_ = new QLabel("", this);
+    photo_->setGeometry( 0,  0, 40, 40);
+    photo_->setScaledContents(true);
+    photo_->setText("1341412413");
+    /* creating 2 states */
+    QState* st1 = new QState();
+    QState* st2 = new QState();
+
+    /* defining photo's properties for each of them */
+    st1->assignProperty(photo_, "geometry", QRect( 0,  0, 40, 40));
+    st2->assignProperty(photo_, "geometry", QRect(50, 50, 200, 200));
+
+    /* define transitions between states by clicking on main window*/
+    st1->addTransition(this, SIGNAL(clicked()), st2);
+    st2->addTransition(this, SIGNAL(clicked()), st1);
+
+    /* adding states to state machine */
+    machine_.addState(st1);
+    machine_.addState(st2);
+    machine_.setInitialState(st1);
+
+
+    QPropertyAnimation* an1 = new QPropertyAnimation(photo_, "geometry");
+    machine_.addDefaultAnimation(an1);
+
+    an1->setEasingCurve(QEasingCurve::InOutCubic);
+    an1->setDuration(500);
+
+    /* starting machine */
+    machine_.start();
+
+    //--------------------------------------------
     lastPos = -1;
-
-
     DataTableModel* model = new DataTableModel;
-
-    ui->setupUi(this);
-
-    ui->tbTekSostAfsz->setModel(model);
+    //ui->setupUi(this);
+    //tbTekSostAfsz->setModel(model);
     //ui->tbTekSostAfsz->resizeColumnsToContents();
-
-    aw = new AnimWidget();
-    aw->resize(width(),height());
-    //aw->resize(500,500);
-    aw->raise();
-    aw->move(x(),y());
-    aw->show();
 
     //ui->widget->move(ui->widget->x() - ui->widget->width()  +50, ui->widget->x());
 
-    //ui->dial->setMinimum(0);
-    //ui->dial->setMaximum(NUM-1);
-    //drawCircleText();
+    dial = new QDial(this);
+    dial->move(x()+width()/2,y()+height()/2);
+    dial->setMinimum(0);
+    dial->setMaximum(NUM-1);
+    drawCircleText();
 
-
+    connect(dial, SIGNAL(&QDial::valueChanged), this, SLOT(on_dial_valueChanged) );
+    connect(dial, SIGNAL(&QDial::sliderMoved), this, SLOT(on_dial_sliderMoved) );
 
 
 }
 
-Form_tek_sost_AFSZ::~Form_tek_sost_AFSZ()
-{
-    delete ui;
+void AnimWidget::mouseReleaseEvent(QMouseEvent*) {
+    emit clicked();
 }
-#if 0
+
+
 // рисуем по часовой стрелке: "Список алгоритмов АЗ ПЗ"
-void Form_tek_sost_AFSZ::drawCircleText() {
+void AnimWidget::drawCircleText() {
 
 #if 1
     QString s[NUM] = {
@@ -90,9 +116,9 @@ void Form_tek_sost_AFSZ::drawCircleText() {
 
 #endif
 
-    double r = ui->dial->width()/2;
-    double x[NUM],X = double(ui->dial->x() +r -0);
-    double y[NUM],Y = double(ui->dial->y() +r-10);
+    double r = dial->width()/2;
+    double x[NUM],X = double(dial->x() +r -0);
+    double y[NUM],Y = double(dial->y() +r-10);
 
     int i;
     double angle, phi;
@@ -102,7 +128,7 @@ void Form_tek_sost_AFSZ::drawCircleText() {
     const double Mult =3;
     int w;
     for(angle=0, i=0; i<NUM && angle<360; i++, angle += 360/NUM) {
-        list << new QLabel( ui->widget );
+        list << new QLabel( this );
         list[i]->setFont(QFont("Times New Roman", 9,-1,true));
         list[i]->setStyleSheet("QLabel {"
                                      "border-style: solid;"
@@ -140,7 +166,7 @@ void Form_tek_sost_AFSZ::drawCircleText() {
 }
 
 
-void Form_tek_sost_AFSZ::on_dial_valueChanged(int i) {
+void AnimWidget::on_dial_valueChanged(int i) {
     //list[i]->setStyleSheet("QLabel { background-color : red; color : blue; }");
     list[i]->setStyleSheet("QLabel {"
                                   "background-color : lightgray;"
@@ -150,7 +176,7 @@ void Form_tek_sost_AFSZ::on_dial_valueChanged(int i) {
                                  "}");
 }
 
-void Form_tek_sost_AFSZ::on_dial_sliderMoved(int i) {
+void AnimWidget::on_dial_sliderMoved(int i) {
     lw = list[i]->width();
     lh = list[i]->height();
     list[i]->resize(lw*2, lh*2);
@@ -173,58 +199,7 @@ void Form_tek_sost_AFSZ::on_dial_sliderMoved(int i) {
     }
     lastPos = i;
 }
-#endif
 
 
-#if 0 //MYTESTBOX
-#include <QMessageBox>
-#include <QKeyEvent>
-#include <QInputDialog>
 
-bool testMode=false; // режим для проверки отсветки слайдов без аппаратуры: буфер данных не обновляется, просто
-               // по адресу <adr> записывает слово <val>  в массив array соотв. класса наследника - только для проверки с
-
-
-void Form_tek_sost_AFSZ::keyPressEvent(QKeyEvent * ev) {
-    //if(!testEnabled) return;
-    bool ok;
-    if(ev->key() == Qt::Key_F12) {
-        if(testMode == false) {
-            /*QString text = QInputDialog::getText(this,
-                "",//tr("Ручная правка данных"),
-                "",//tr("Чтение из аппаратуры выключено. Введите через запятую: адрес, значение"),
-                QLineEdit::Normal, 0, &ok);
-            if (ok && !text.isEmpty()) {
-                QStringList slist = text.split(",");
-                int adr=slist[0].toInt(&ok);  if(!ok) return;
-                int val=slist[1].toInt(&ok);  if(!ok) return;
-                //dic->setData(adr,val);
-            }*/
-            //dic->testMode = true;
-        }
-        else {
-            QMessageBox mb;
-            //mb.setText(tr("Ручная правка данных отключена"));
-            //mb.setInformativeText( tr("Чтение из аппаратуры восстановлено") );
-            //mb.exec();
-
-
-            testMode=false;
-        }
-    }
-    if(ev->key() == Qt::Key_F11) {
-        QString text = QInputDialog::getText(this,
-            "",//tr("Ручная правка данных"),
-            "",//tr("Чтение из аппаратуры выключено. Введите через запятую: адрес, значение"),
-            QLineEdit::Normal, 0, &ok);
-        if (ok && !text.isEmpty()) {
-            QStringList slist = text.split(",");
-            int adr=slist[0].toInt(&ok);  if(!ok) return;
-            int val=slist[1].toInt(&ok);  if(!ok) return;
-            //array[adr] = val;
-        }
-        testMode = true;
-    }
-}
-#endif
 
