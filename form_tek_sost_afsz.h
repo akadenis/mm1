@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QList>
 #include "animwidget.h"
+#include <QStateMachine>
 using namespace std;
 
 
@@ -21,6 +22,15 @@ public:
     explicit Form_tek_sost_AFSZ(QWidget *parent = 0);
     ~Form_tek_sost_AFSZ();
 
+signals:
+    /* signal for triggering state machine changes */
+    void clicked();
+
+protected:
+    /* here we will be catching clicks */
+    virtual void mouseReleaseEvent(QMouseEvent*);
+
+
 
 private slots:
     //void on_dial_valueChanged(int value);
@@ -28,6 +38,10 @@ private slots:
     //void on_dial_sliderMoved(int position);
 
 private:
+
+    QStateMachine machine_;
+
+
     AnimWidget *aw;
     static const int NUM= 33;
 
@@ -44,6 +58,9 @@ private:
 
     int lastPos;
     int lh,lw;
+
+    QState* st1;
+    QState* st2;
 
 };
 

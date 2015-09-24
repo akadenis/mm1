@@ -6,22 +6,22 @@
 #include <QWidget>
 #include <QDial>
 
-class AnimWidget : public QWidget {
+class AnimWidget : public QFrame {
 Q_OBJECT
 public:
 
 
     static const int NUM= 33;
 
-    AnimWidget();
+    AnimWidget(QWidget* parent = 0);
 
 signals:
     /* signal for triggering state machine changes */
-    void clicked();
+//    void clicked();
 
 protected:
     /* here we will be catching clicks */
-    virtual void mouseReleaseEvent(QMouseEvent*);
+//    virtual void mouseReleaseEvent(QMouseEvent*);
 
 
 public slots:
@@ -29,7 +29,7 @@ public slots:
    void on_dial_sliderMoved(int value);
 
 private:
-    QStateMachine machine_;
+
     QLabel* photo_;
     QDial *dial;
 

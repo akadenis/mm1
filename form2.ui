@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form_tek_sost_AFSZ</class>
- <widget class="QWidget" name="Form_tek_sost_AFSZ">
+ <class>Form2</class>
+ <widget class="QWidget" name="Form2">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,13 +13,13 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTableView" name="tbTekSostAfsz">
+  <widget class="QListView" name="listView">
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>10</y>
+     <y>20</y>
      <width>801</width>
-     <height>591</height>
+     <height>581</height>
     </rect>
    </property>
   </widget>

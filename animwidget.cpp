@@ -9,37 +9,25 @@
 
 
 
-AnimWidget::AnimWidget() {
-    photo_ = new QLabel("", this);
-    photo_->setGeometry( 0,  0, 40, 40);
-    photo_->setScaledContents(true);
-    photo_->setText("1341412413");
+AnimWidget::AnimWidget(QWidget* parent): QFrame(parent) {
+
+    move(200,200);
+
+//    photo_ = new QLabel("", this);
+//    photo_->setGeometry( 0,  0, 40, 40);
+//    photo_->setScaledContents(true);
+//    photo_->setText("1341412413");
+
     /* creating 2 states */
-    QState* st1 = new QState();
-    QState* st2 = new QState();
+//    QState* st1 = new QState();
+//    QState* st2 = new QState();
 
     /* defining photo's properties for each of them */
-    st1->assignProperty(photo_, "geometry", QRect( 0,  0, 40, 40));
-    st2->assignProperty(photo_, "geometry", QRect(50, 50, 200, 200));
-
-    /* define transitions between states by clicking on main window*/
-    st1->addTransition(this, SIGNAL(clicked()), st2);
-    st2->addTransition(this, SIGNAL(clicked()), st1);
-
-    /* adding states to state machine */
-    machine_.addState(st1);
-    machine_.addState(st2);
-    machine_.setInitialState(st1);
+//    st1->assignProperty(photo_, "geometry", QRect( 0,  0, 40, 40));
+//    st2->assignProperty(photo_, "geometry", QRect(50, 50, 200, 200));
 
 
-    QPropertyAnimation* an1 = new QPropertyAnimation(photo_, "geometry");
-    machine_.addDefaultAnimation(an1);
 
-    an1->setEasingCurve(QEasingCurve::InOutCubic);
-    an1->setDuration(500);
-
-    /* starting machine */
-    machine_.start();
 
     //--------------------------------------------
     lastPos = -1;
@@ -49,6 +37,8 @@ AnimWidget::AnimWidget() {
     //ui->tbTekSostAfsz->resizeColumnsToContents();
 
     //ui->widget->move(ui->widget->x() - ui->widget->width()  +50, ui->widget->x());
+
+
 
     dial = new QDial(this);
     dial->move(x()+width()/2,y()+height()/2);
@@ -62,9 +52,9 @@ AnimWidget::AnimWidget() {
 
 }
 
-void AnimWidget::mouseReleaseEvent(QMouseEvent*) {
-    emit clicked();
-}
+//void AnimWidget::mouseReleaseEvent(QMouseEvent*) {
+//    emit clicked();
+//}
 
 
 // рисуем по часовой стрелке: "Список алгоритмов АЗ ПЗ"

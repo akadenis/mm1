@@ -1,4 +1,4 @@
-#include "dataTableModel.h"
+#include "mdl1.h"
 #include <QColor>
 #include <string.h>
 #include <qt4/QtCore/qabstractitemmodel.h>
@@ -7,7 +7,7 @@
 
 
 
-DataTableModel::DataTableModel() : QAbstractTableModel() {
+Mdl1::Mdl1() : QAbstractTableModel() {
 //    this->dic = dic;
 //    dicData = dic->getArray();
     flag = false;
@@ -20,7 +20,7 @@ DataTableModel::DataTableModel() : QAbstractTableModel() {
 
 }
 
-int DataTableModel::rowCount(const QModelIndex &parent) const {
+int Mdl1::rowCount(const QModelIndex &parent) const {
     if (parent.isValid())
         return 0;
     else
@@ -28,7 +28,7 @@ int DataTableModel::rowCount(const QModelIndex &parent) const {
     //    else return 0;
 }
 
-int DataTableModel::columnCount(const QModelIndex &parent) const {
+int Mdl1::columnCount(const QModelIndex &parent) const {
     if (parent.isValid())
         return 0;
     else
@@ -36,7 +36,7 @@ int DataTableModel::columnCount(const QModelIndex &parent) const {
     //    else return 0;
 }
 
-/*void DataTableModel::timerEvent(QTimerEvent*) {
+/*void Mdl1::timerEvent(QTimerEvent*) {
     if(flag){
     for (int i = 0; i < dic->getDataLength(); i++) {
         if (array[i] != dic->getArray()[i])
@@ -50,7 +50,7 @@ int DataTableModel::columnCount(const QModelIndex &parent) const {
    // emit dataChanged;
 }*/
 
-QVariant DataTableModel::data(const QModelIndex &index, int role) const {
+QVariant Mdl1::data(const QModelIndex &index, int role) const {
     if (role == Qt::DisplayRole) {
         QString answ;
         switch (index.column()) {
@@ -79,7 +79,7 @@ QVariant DataTableModel::data(const QModelIndex &index, int role) const {
     return QVariant();
 }
 
-QVariant DataTableModel::headerData(int section, Qt::Orientation orientation, int role) const {
+QVariant Mdl1::headerData(int section, Qt::Orientation orientation, int role) const {
     if (role == Qt::DisplayRole) {
         if (orientation == Qt::Horizontal) {
             switch (section) {
