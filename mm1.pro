@@ -29,7 +29,8 @@ SOURCES += main.cpp\
     form1.cpp \
     form2.cpp \
     ParamTableModel.cpp \
-    form3.cpp
+    form3.cpp \
+    form_temporary.cpp
 
 HEADERS  += mainwindow.h \
     form_tek_sost_ik.h \
@@ -44,7 +45,8 @@ HEADERS  += mainwindow.h \
     form1.h \
     form2.h \
     ParamTableModel.h \
-    form3.h
+    form3.h \
+    form_temporary.h
 
 FORMS    += mainwindow.ui \
     form_tek_sost_afsz.ui \
@@ -52,7 +54,8 @@ FORMS    += mainwindow.ui \
     mainform.ui \
     form1.ui \
     form2.ui \
-    form3.ui
+    form3.ui \
+    form_temporary.ui
 
 RESOURCES += \
     res1.qrc
