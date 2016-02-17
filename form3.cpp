@@ -37,7 +37,7 @@ Form3::Form3(QWidget *parent) :
 {
     ethPackBuild();
 
-    ix=0;
+    ix= discrSlideCurr=0;
     hideFrameNumbersTimerEnabled =hide2DigitTimerEnabled = false;
     lastMousePosX=lastMousePosY=0;
     dig[0] = dig[1] = 0; digCnt = 0;
@@ -166,8 +166,6 @@ void Form3::onHide2Digit() {
     }
 
 }
-
-static int discrSlideCurr = 0;
 
 void Form3::keyPressEvent(QKeyEvent * ev) {
     QStackedWidget *sw = ui->stackedWidget;
@@ -371,25 +369,3 @@ void Form3::setPpnPage(int n) {
 // номер слайда (0..3) для дискр сигналов
 int dSlideN=0;
 
-void Form3::paintEvent(QPaintEvent* e) {
-    int ix = ui->stackedWidget->currentIndex();
-
-    if( ix==13 ) {
-        switch(discrSlideCurr) {
-        case 0: // вх 151,152
-            paintEvent1(in151);
-            break;
-        case 1:
-            paintEvent1(out155az);
-            break;
-        case 2:
-            paintEvent1(out155pz);
-            break;
-        case 3:
-            paintEvent1(pca);
-            break;
-        }
-    }
-
-
-}

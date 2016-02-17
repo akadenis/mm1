@@ -16,8 +16,10 @@
 //    ~Form();
 //    void i1(int x, int y, int w, int h);
 //    void paintEvent(QPaintEvent*);
-//    void paintEvent1(QPaintEvent*);
-//    void paintEvent2(QPaintEvent*);
+//    //void paintEvent1(QPaintEvent*);
+//    enum DevType { in151, out155az, out155pz, pca };
+//    void paintEvent1(DevType type);
+
 
 //    void drawVTxt(QPainter *painter, const QPoint& p, const QString& str);
 //private:

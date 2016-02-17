@@ -141,8 +141,8 @@ private:
     void timerBell();
     Ref *ref;
     referencePpn *ppnRef;
-
     int ix; // индекс (номер) текущего слайда
+    int discrSlideCurr; // номер текущего экрана (0..3) на слайде ИК
 
 public:
     Ui::Form3 *ui;
