@@ -5,12 +5,14 @@
 #include <QVariant>
 
 typedef unsigned short int uint16_t ;
+typedef unsigned int uint32_t ;
 
 class DataTableModel : public QAbstractTableModel {
     Q_OBJECT
 public:
     //explicit DataBusTableModel(QObject *parent = 0);
     DataTableModel();
+    int pkN;
 
 signals:
 
@@ -19,11 +21,12 @@ public slots:
 
 private:
 
+
+
     int dataLen;
-  //  void timerEvent(QTimerEvent*);
-    uint16_t valData[1000];
+    void timerEvent(QTimerEvent*);
+
 //    Dic *dic;
-    uint16_t *array;
     bool flag;
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const;

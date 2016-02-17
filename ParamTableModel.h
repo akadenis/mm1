@@ -1,36 +1,34 @@
-#ifndef ParamTableModel_H
-#define ParamTableModel_H
+//#ifndef ParamTableModel_H
+//#define ParamTableModel_H
 
-#include <QAbstractTableModel>
-#include <QVariant>
+//#include <QAbstractTableModel>
+//#include <QVariant>
 
-typedef unsigned short int uint16_t ;
+//typedef unsigned short int uint16_t ;
 
-class ParamTableModel : public QAbstractTableModel {
-    Q_OBJECT
-public:
-    //explicit DataBusTableModel(QObject *parent = 0);
-    ParamTableModel();
+//class ParamTableModel : public QAbstractTableModel {
+//    Q_OBJECT
+//public:
+//    //explicit DataBusTableModel(QObject *parent = 0);
+//    ParamTableModel();
 
-signals:
+//signals:
 
-public slots:
+//public slots:
 
 
-private:
+//private:
 
-    int dataLen;
-  //  void timerEvent(QTimerEvent*);
-    uint16_t valData[1000];
-//    Dic *dic;
-    uint16_t *array;
-    bool flag;
+//    int dataLen;
+//  //  void timerEvent(QTimerEvent*);
+//    uint16_t *array;
+//    bool flag;
 
-    int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    int columnCount(const QModelIndex &parent= QModelIndex()) const;
-    QVariant data(const QModelIndex &index, int role) const;
-    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+//    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+//    int columnCount(const QModelIndex &parent= QModelIndex()) const;
+//    QVariant data(const QModelIndex &index, int role) const;
+//    QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 
-};
+//};
 
-#endif // ParamTableModel_H
+//#endif // ParamTableModel_H

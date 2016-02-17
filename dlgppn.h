@@ -2,6 +2,7 @@
 #define DLGPPN_H
 
 #include <QDialog>
+#include <QKeyEvent>
 
 namespace Ui {
 class dlgPpn;
@@ -17,6 +18,11 @@ public:
 
 private:
     Ui::dlgPpn *ui;
+
+    int dig[2];
+    int digCnt;
+
+    void keyPressEvent(QKeyEvent * ev);
 };
 
 #endif // DLGPPN_H

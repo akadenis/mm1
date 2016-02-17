@@ -2,6 +2,7 @@
 #define REFERENCEPPN_H
 
 #include <QWidget>
+#include <QKeyEvent>
 
 namespace Ui {
 class referencePpn;
@@ -17,6 +18,12 @@ public:
 
 private:
     Ui::referencePpn *ui;
+
+
+    int dig[2];
+    int digCnt;
+
+    void keyPressEvent(QKeyEvent * ev);
 };
 
 #endif // REFERENCEPPN_H

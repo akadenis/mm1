@@ -13,49 +13,62 @@ TEMPLATE = app
 
 CONFIG += c++11
 
-QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++11 -pthread
 QMAKE_LFLAGS += -Wl,--no-as-needed
 
+QMAKE_CFLAGS +=  -pthread
+
+LIBS += -pthread
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    form_tek_sost_ik.cpp \
     dataTableModel.cpp \
-    form_tek_sost_afsz.cpp \
-    animwidget.cpp \
-    mainform.cpp \
-    elemlist.cpp \
-    mdl1.cpp \
-    form1.cpp \
-    form2.cpp \
     ParamTableModel.cpp \
     form3.cpp \
-    form_temporary.cpp
+    contentsdlg.cpp \
+    shmemthread.cpp \
+    ethrecv.cpp \
+    ethtesttv.cpp \
+    ChannelDataModel.cpp \
+    formula.cpp \
+    mdlppndata.cpp \
+    ppn.cpp \
+    ethsend.cpp \
+    referenceppn.cpp \
+    dlgppn.cpp \
+    ref.cpp \
+    form3_labelcolor.cpp \
+    form3_slideFailConnect.cpp \
+    form.cpp \
+    form3_slideDiscr.cpp \
+    form3_ustav.cpp \
+    form3_ppn.cpp \
+    form3_slideDiscrTxt.cpp \
+    form3_alg.cpp
 
-HEADERS  += mainwindow.h \
-    form_tek_sost_ik.h \
+HEADERS  += \
     dataTableModel.h \
-    form_tek_sost_afsz.h \
-    animwidget.h \
-    mainform.h \
-    str.h \
-    elemlist.h \
-    1_list.h \
-    mdl1.h \
-    form1.h \
-    form2.h \
     ParamTableModel.h \
     form3.h \
-    form_temporary.h
+    contentsdlg.h \
+    shmemthread.h \
+    packdata.h \
+    ethrecv.h \
+    ethtesttv.h \
+    ChannelDataModel.h \
+    formula.h \
+    mdlppndata.h \
+    ppn.h \
+    constants.h \
+    referenceppn.h \
+    dlgppn.h \
+    ref.h \
+    form.h
 
-FORMS    += mainwindow.ui \
-    form_tek_sost_afsz.ui \
-    form_tek_sost_ik.ui \
-    mainform.ui \
-    form1.ui \
-    form2.ui \
+FORMS    += \
     form3.ui \
-    form_temporary.ui
+    referenceppn.ui \
+    dlgppn.ui \
+    ref.ui
 
 RESOURCES += \
     res1.qrc
