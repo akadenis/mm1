@@ -112,9 +112,11 @@ public:
     // для отрисовки вертикального текста
     void drawVTxt(QPainter *painter, const QPoint& p, const QString& str);
 
+    enum SigType {SigInD, SigInA};
+
     // отрисовка вх.дискр сигналов для схем алгоритмов (??)
-    void i1(int x, int y, int w, int h);
-    void an1(int x, int y, int w, int h);
+    void i1(SigType, int x, int y, int w, int h);
+    //void an1(int x, int y, int w, int h);
     enum DevType { in151, out155az, out155pz, pca };
     // отрисовка слайдов дискр сигналов
     void paintEvent1(DevType type);
