@@ -85,6 +85,8 @@ public:
 
     void l1(QLabel *lb, int b);
     void l2(QLabel *lb, int b);
+    // закрашенный треугольник (0-зеленый, 1-красный)
+    void triangle(QPainter *painter, int up, int x, int y, int color=0 );
 
     //extern unsigned char *ar;
     //unsigned char ar[1536*3];

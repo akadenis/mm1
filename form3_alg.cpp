@@ -8,6 +8,17 @@ extern unsigned char valData[ETH_SRC_NUM][1600];
 
 QString str_sch1_in [] = { "p_peak"};
 
+void Form3::triangle(QPainter *painter, int up, int x, int y, int color) {
+    //QPainter painter(this);
+    if(color==0) painter->setBrush(Qt::green);
+    else painter->setBrush(Qt::red);
+    QPolygon polygon;
+    if(up==1)
+        polygon << QPoint(x,y+11) << QPoint(x+6, y)<< QPoint(x+12, y+11);
+    else
+        polygon << QPoint(x,y) << QPoint(x+6, y+11)<< QPoint(x+12, y);
+    painter->drawPolygon(polygon);
+}
 // вх.дискр сигнал, для схем алгоритмов
 void Form3::i1(SigType type, int x, int y, int w=30, int h=40) {
     int x1=x;
@@ -23,16 +34,7 @@ void Form3::i1(SigType type, int x, int y, int w=30, int h=40) {
         QRect r1_inner(r1_inborder.adjusted(1,1,0,0));
         painter.fillRect(r1_inner, Qt::red);
         x1=r1_outborder.x()+r1_outborder.width();
-
-        // треугольники
-        if(type==SigInA) {
-            QPolygon polygon;
-            polygon << QPoint(x1-25,y) << QPoint(x1-23, y-8)<< QPoint(x1-28, y-8);
-            painter.drawPolygon(points, 3);
-        }
-
     }
-    return;
     //else if(type==SigInA) {
     QRect r2_outborder(x1,y,200,h);
     painter.drawRect(r2_outborder);
@@ -55,8 +57,8 @@ void Form3::i1(SigType type, int x, int y, int w=30, int h=40) {
         y+=h;
         QRect r2_outborder(x1,y,200,h);
         painter.drawRect(r2_outborder);
-        QRect r2_outter(r2_outborder.adjusted(1,1,0,0));
-        painter.fillRect(r2_outter, Qt::red);
+//        QRect r2_outter(r2_outborder.adjusted(1,1,0,0));
+//        painter.fillRect(r2_outter, Qt::red);
         painter.drawText(QPoint(x1+5,y+h/2+5), "название");
         QRect r3_outborder(x2=r2_outborder.x()+r2_outborder.width(),y,20,h);
         painter.drawRect(r3_outborder);
@@ -64,6 +66,11 @@ void Form3::i1(SigType type, int x, int y, int w=30, int h=40) {
         painter.fillRect(r3_outter, Qt::red);
     }
 
+    // треугольники
+    if(type==SigInA) {
+        triangle(&painter, 0, x2-40,y,0);
+        triangle(&painter, 1, x2-20,y,0);
+    }
 
     // три коротких линии
     int sm = 12;
@@ -94,8 +101,6 @@ void Form3::i1(SigType type, int x, int y, int w=30, int h=40) {
     painter.drawText(x3+12,y+h/3+11, "2");
     painter.drawText(x3+12,y+h*2/3+12, "3");
     painter.setFont(oldfont);
-
-
 
 
 
